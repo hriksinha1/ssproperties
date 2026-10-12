@@ -34,7 +34,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           : "flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
       } ${className}`}
     >
-      <div className={`flex flex-col ${isCentered ? "items-center" : "items-start"} max-w-2xl`}>
+      <div className={`flex flex-col ${isCentered ? "items-center" : "items-start"} max-w-2xl text-left`}>
         {eyebrow && (
           <div className="mb-3">
             <Badge variant="outline" icon={eyebrowIcon}>
@@ -44,7 +44,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         )}
         <h2
           id={id}
-          className="font-display uppercase text-[#0E170E] tracking-[0.015em] text-[clamp(2.25rem,5vw,4.25rem)] leading-[1.05]"
+          className="font-display uppercase text-ink tracking-[0.015em] text-[clamp(2.25rem,5vw,4.25rem)] leading-[1.05]"
           style={{ textWrap: "balance" }}
         >
           {titleLine1}
@@ -56,7 +56,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           )}
         </h2>
         {isCentered && description && (
-          <p className="mt-3 text-sm md:text-base text-[#566356] max-w-xl leading-relaxed">
+          <p className="mt-3 text-sm md:text-base text-ink-muted max-w-xl leading-relaxed text-center">
             {description}
           </p>
         )}
@@ -65,7 +65,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       {!isCentered && (description || rightAction) && (
         <div className="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end gap-4 max-w-md lg:text-right shrink-0">
           {description && (
-            <p className="text-sm md:text-base text-[#566356] leading-relaxed">
+            <p className="text-sm md:text-base text-ink-muted leading-relaxed">
               {description}
             </p>
           )}

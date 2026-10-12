@@ -1,4 +1,8 @@
 import { IMAGES } from "./images";
+import { CURRENCY_CODE, CURRENCY_LOCALE } from "../config/site";
+
+export type PropertyStatus = "For Sale" | "For Rent" | "New Launch";
+export type PropertyType = "Apartment" | "House" | "Villa" | "Land" | "Office";
 
 export interface PropertyListing {
   id: string;
@@ -6,16 +10,27 @@ export interface PropertyListing {
   location: string;
   city: string;
   price: number;
-  formattedPrice: string;
-  status: "For Sale" | "For Rent" | "New Launch";
-  propertyType: "Apartment" | "House" | "Villa" | "Land" | "Office";
+  status: PropertyStatus;
+  propertyType: PropertyType;
   beds: number;
   baths: number;
   areaSqFt: number;
-  agentName: string;
-  agentAvatar: string;
   image: string;
   imageAlt: string;
+  srcSet?: string;
+  isSample: boolean;
+}
+
+export function formatListingPrice(price: number): string {
+  try {
+    return new Intl.NumberFormat(CURRENCY_LOCALE, {
+      style: "currency",
+      currency: CURRENCY_CODE,
+      maximumFractionDigits: 0,
+    }).format(price);
+  } catch {
+    return `$${price.toLocaleString()}`;
+  }
 }
 
 export const LISTINGS_DATA: PropertyListing[] = [
@@ -25,16 +40,15 @@ export const LISTINGS_DATA: PropertyListing[] = [
     location: "Los Angeles, California",
     city: "Los Angeles",
     price: 2850000,
-    formattedPrice: "$2,850,000",
     status: "For Sale",
     propertyType: "Apartment",
     beds: 4,
     baths: 2,
     areaSqFt: 2200,
-    agentName: "Joseph Riggs",
-    agentAvatar: IMAGES.avatars.agent,
     image: IMAGES.listings.casaVerde.src,
     imageAlt: IMAGES.listings.casaVerde.alt,
+    srcSet: IMAGES.listings.casaVerde.srcSet,
+    isSample: true,
   },
   {
     id: "glass-house",
@@ -42,16 +56,15 @@ export const LISTINGS_DATA: PropertyListing[] = [
     location: "Los Angeles, California",
     city: "Los Angeles",
     price: 3850000,
-    formattedPrice: "$3,850,000",
-    status: "For Sale",
+    status: "For Rent",
     propertyType: "House",
     beds: 3,
     baths: 3,
     areaSqFt: 3100,
-    agentName: "Joseph Riggs",
-    agentAvatar: IMAGES.avatars.agent,
     image: IMAGES.listings.glassHouse.src,
     imageAlt: IMAGES.listings.glassHouse.alt,
+    srcSet: IMAGES.listings.glassHouse.srcSet,
+    isSample: true,
   },
   {
     id: "cedar-residence",
@@ -59,16 +72,15 @@ export const LISTINGS_DATA: PropertyListing[] = [
     location: "Los Angeles, California",
     city: "Los Angeles",
     price: 2850000,
-    formattedPrice: "$2,850,000",
     status: "For Sale",
     propertyType: "House",
     beds: 5,
     baths: 4,
     areaSqFt: 4500,
-    agentName: "Joseph Riggs",
-    agentAvatar: IMAGES.avatars.agent,
     image: IMAGES.listings.cedarResidence.src,
     imageAlt: IMAGES.listings.cedarResidence.alt,
+    srcSet: IMAGES.listings.cedarResidence.srcSet,
+    isSample: true,
   },
   {
     id: "villa-serenita",
@@ -76,16 +88,15 @@ export const LISTINGS_DATA: PropertyListing[] = [
     location: "Miami, Florida",
     city: "Miami",
     price: 4200000,
-    formattedPrice: "$4,200,000",
     status: "For Sale",
     propertyType: "Villa",
     beds: 4,
     baths: 4,
     areaSqFt: 3800,
-    agentName: "Joseph Riggs",
-    agentAvatar: IMAGES.avatars.agent,
     image: IMAGES.listings.villaSerenita.src,
     imageAlt: IMAGES.listings.villaSerenita.alt,
+    srcSet: IMAGES.listings.villaSerenita.srcSet,
+    isSample: true,
   },
   {
     id: "horizon-peak",
@@ -93,16 +104,15 @@ export const LISTINGS_DATA: PropertyListing[] = [
     location: "Austin, Texas",
     city: "Austin",
     price: 1950000,
-    formattedPrice: "$1,950,000",
-    status: "For Sale",
+    status: "New Launch",
     propertyType: "House",
     beds: 3,
     baths: 2,
     areaSqFt: 2400,
-    agentName: "Joseph Riggs",
-    agentAvatar: IMAGES.avatars.agent,
     image: IMAGES.listings.horizonPeak.src,
     imageAlt: IMAGES.listings.horizonPeak.alt,
+    srcSet: IMAGES.listings.horizonPeak.srcSet,
+    isSample: true,
   },
   {
     id: "nordic-pine",
@@ -110,15 +120,14 @@ export const LISTINGS_DATA: PropertyListing[] = [
     location: "New York, New York",
     city: "New York",
     price: 5400000,
-    formattedPrice: "$5,400,000",
     status: "For Sale",
-    propertyType: "Office",
+    propertyType: "House",
     beds: 5,
     baths: 5,
     areaSqFt: 5100,
-    agentName: "Joseph Riggs",
-    agentAvatar: IMAGES.avatars.agent,
     image: IMAGES.listings.nordicPine.src,
     imageAlt: IMAGES.listings.nordicPine.alt,
+    srcSet: IMAGES.listings.nordicPine.srcSet,
+    isSample: true,
   },
 ];

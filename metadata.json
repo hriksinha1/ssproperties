@@ -1,6 +1,6 @@
 {
-  "name": "Architron - Luxury Real Estate",
-  "description": "Discover extraordinary architectural homes in the most desirable locations with Architron.",
+  "name": "SSProperty - Real Estate",
+  "description": "Browse homes, apartments, land and offices with SSProperty. Message us on WhatsApp to ask questions or arrange a viewing.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

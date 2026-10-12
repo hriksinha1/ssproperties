@@ -1,100 +1,55 @@
-# Architron - Luxury Real Estate Landing Page
+# SSProperty - Real Estate Landing Page
 
-A single-page architectural real-estate landing page built with React, Vite, and Tailwind CSS, featuring a calming pale-green canvas (`#F3F9EE`), high-contrast typography (Bebas Neue & Inter), and an image-led layout.
+A single-page real-estate landing website built with React 19, TypeScript, Vite 8, and Tailwind CSS v4.3.
 
-## Project Structure
+## Project Architecture
 
-```
-.
-├── .env.example
-├── index.html
-├── metadata.json
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-├── README.md
-└── src/
-    ├── App.tsx
-    ├── index.css
-    ├── main.tsx
-    ├── config/
-    │   └── site.ts
-    ├── data/
-    │   ├── articles.ts
-    │   ├── categories.ts
-    │   ├── faqs.ts
-    │   ├── footerLinks.ts
-    │   ├── images.ts
-    │   ├── listings.ts
-    │   ├── services.ts
-    │   └── testimonials.ts
-    └── components/
-        ├── cards/
-        │   ├── ArticleCard.tsx
-        │   ├── CategoryCard.tsx
-        │   ├── FeaturedPropertyMini.tsx
-        │   ├── HelpPanel.tsx
-        │   └── PropertyCard.tsx
-        ├── layout/
-        │   ├── Footer.tsx
-        │   ├── Header.tsx
-        │   ├── MobileNav.tsx
-        │   └── NewsletterForm.tsx
-        ├── sections/
-        │   ├── Articles.tsx
-        │   ├── ContactCTA.tsx
-        │   ├── FAQ.tsx
-        │   ├── FeaturedListings.tsx
-        │   ├── Hero.tsx
-        │   ├── LifestyleCategories.tsx
-        │   ├── PersonalizedService.tsx
-        │   └── PropertySearch.tsx
-        └── ui/
-            ├── AvatarStack.tsx
-            ├── Badge.tsx
-            ├── Button.tsx
-            ├── Chip.tsx
-            ├── CircleIconButton.tsx
-            ├── Input.tsx
-            ├── SectionHeading.tsx
-            └── SmartImage.tsx
-```
+- **Framework**: React 19 + TypeScript 7 + Vite 8
+- **Styling**: Tailwind CSS v4.3 using CSS-first configuration in `src/index.css` (`@theme`, `@utility`).
+- **Typography**: Bebas Neue (display headings) and Inter (weights 400, 500, 600) loaded via Google Fonts in `index.html`.
+- **Icons**: Lucide React and verified official inline SVGs for social media links.
+- **Section Order & Anchors**:
+  1. Hero (`#hero`) with overlaid header and overlapping search panel
+  2. Featured Listings (`#properties`)
+  3. Services & Guidance (`#about`)
+  4. Lifestyle & Categories (`#lifestyle`)
+  5. Testimonials (`#testimonials`)
+  6. Guides & Articles (`#blog`)
+  7. Frequently Asked Questions (`#faq`)
+  8. Contact & Conversion CTA (`#contact`)
+  9. Footer
+
+## Configuration & Content Management
+
+All global site constants are centralized in `src/config/site.ts`:
+
+- `BRAND_NAME`: Set to `"SSProperty"`.
+- `SAMPLE_CONTENT`: Set to `true` by default while inventory and testimonials are samples. When set to `false`, sample banners are removed, and sections without real data automatically hide cleanly.
+- `WHATSAPP_URL`: Set to `"https://wa.me/8282878287"`. (Note for owner: verify country code prefix if required, e.g. `https://wa.me/918282878287` for India).
+- `WHATSAPP_DISPLAY`: Set to `"8282878287"`.
+- `SOCIAL_LINKS`: Links to verified Facebook, Instagram, LinkedIn, and WhatsApp channels.
+- `CONTACT_INFO`: Optional email and address fields (only rendered in the UI when populated).
+- `CURRENCY_CODE` & `CURRENCY_LOCALE`: Defaults to `"USD"` / `"en-US"`. Update to match your local market currency and formatting (e.g. `"INR"` / `"en-IN"`).
+- `AREA_UNIT`: Default `"sq. ft."`.
+
+## Environment Variables
+
+Defined in `.env.example`:
+- `VITE_FORM_ENDPOINT`: (Optional) URL for POSTing contact form inquiries to a custom backend or CRM webhook. If omitted, the form automatically formats the inquiry and opens a WhatsApp conversation.
+- `VITE_NEWSLETTER_ENDPOINT`: (Optional) URL for newsletter submissions. If omitted, a direct WhatsApp update button is displayed.
 
 ## Vercel Deployment Instructions
 
 1. **Push to GitHub**:
-   - Initialize git (if not already): `git init`
-   - Stage all files: `git add .`
-   - Commit: `git commit -m "Initial commit of Architron real estate landing page"`
-   - Push to your GitHub repository: `git remote add origin <your-repo-url>` and `git push -u origin main`.
+   - `git init`
+   - `git add .`
+   - `git commit -m "Configure SSProperty real-estate landing page"`
+   - `git push -u origin main`
 
 2. **Import into Vercel**:
-   - Go to [vercel.com](https://vercel.com) and log in.
-   - Click **Add New...** -> **Project**.
-   - Select your GitHub repository.
-
-3. **Project Configuration Settings**:
+   - Go to [vercel.com](https://vercel.com) and create a new project from your repository.
    - **Framework Preset**: `Vite`
-   - **Root Directory**: `./`
    - **Build Command**: `npm run build`
    - **Output Directory**: `dist`
    - **Install Command**: `npm install`
-
-4. **Environment Variables**:
-   - `VITE_FORM_ENDPOINT` (Optional): URL of your backend or CRM form submission webhook/API.
-
-5. **Deploy**:
-   - Click **Deploy**. Vercel will build the project and output a preview/production domain.
-
-## Design Tokens & Typography
-
-- **Display Font**: `Bebas Neue` (400 weight, uppercase, font-synthesis: none)
-- **Secondary Font**: `Inter` (400, 500, 600 weights)
-- **Colors**:
-  - `--bg-page`: `#F3F9EE` (pale green canvas)
-  - `--bg-tint`: `#E8F5DE` (soft rounded footer, cards, help panel)
-  - `--accent`: `#C8EFAE` (primary buttons, active tabs, highlight states)
-  - `--accent-strong`: `#A9E18A` (accent hover)
-  - `--ink`: `#0E170E` (headings, dark buttons, text)
-  - `--ink-muted`: `#566356` (secondary descriptions, metadata)
-  - `--border`: `#DCE8D5`
+   - **Node.js Version**: Node >= 20.19 or >= 22.12

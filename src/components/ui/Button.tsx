@@ -20,7 +20,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-full select-none transition-all duration-200 cursor-pointer min-h-[44px] focus-visible:outline-2 focus-visible:outline-[#0E170E] focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
+    "inline-flex items-center justify-center font-medium rounded-full select-none transition-all duration-200 cursor-pointer min-h-[44px] focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
 
   const sizeStyles = {
     sm: "px-4 py-2 text-xs min-h-[40px]",
@@ -29,11 +29,11 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const variantStyles = {
-    primary: "bg-[#C8EFAE] text-[#0E170E] hover:bg-[#A9E18A] active:scale-[0.98] shadow-sm",
-    dark: "bg-[#0E170E] text-white hover:bg-[#1f2e1f] active:scale-[0.98]",
-    outline: "border border-[#DCE8D5] bg-white text-[#0E170E] hover:bg-[#F3F9EE] active:scale-[0.98]",
-    subtle: "bg-[#E8F5DE] text-[#0E170E] hover:bg-[#C8EFAE] active:scale-[0.98]",
-    ghost: "bg-transparent text-[#0E170E] hover:bg-[#E8F5DE]",
+    primary: "bg-accent text-ink hover:bg-accent-strong active:scale-[0.98] shadow-sm",
+    dark: "bg-ink text-white hover:bg-black active:scale-[0.98]",
+    outline: "border border-line bg-surface text-ink hover:bg-tint active:scale-[0.98]",
+    subtle: "bg-tint text-ink hover:bg-accent active:scale-[0.98]",
+    ghost: "bg-transparent text-ink hover:bg-tint",
     "translucent-dark": "bg-black/50 text-white hover:bg-black/70 backdrop-blur-md active:scale-[0.98]",
   };
 

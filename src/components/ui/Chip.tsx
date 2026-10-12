@@ -16,10 +16,10 @@ export const Chip: React.FC<ChipProps> = ({
   return (
     <button
       type="button"
-      className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium cursor-pointer transition-all duration-200 min-h-[38px] select-none focus-visible:outline-2 focus-visible:outline-[#0E170E] focus-visible:outline-offset-2 ${
+      className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium cursor-pointer transition-all duration-200 min-h-[40px] select-none focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 ${
         active
-          ? "bg-[#0E170E] text-white shadow-xs"
-          : "bg-white/80 border border-[#DCE8D5] text-[#0E170E] hover:bg-white hover:border-[#0E170E]/30"
+          ? "bg-ink text-white shadow-xs"
+          : "bg-surface border border-line text-ink hover:bg-tint hover:border-line-strong"
       } ${className}`}
       aria-pressed={active}
       {...props}

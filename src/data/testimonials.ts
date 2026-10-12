@@ -1,53 +1,40 @@
 import { IMAGES } from "./images";
 
-/**
- * Note: Names, roles, and testimonials below are simulated sample data
- * for design demonstration purposes only.
- */
-
 export interface TestimonialItem {
   id: string;
   name: string;
   role: string;
-  rating: number;
-  ratingText: string;
-  title: string;
   quote: string;
   avatar: string;
+  isSample: boolean;
 }
 
 export const TESTIMONIALS_DATA: TestimonialItem[] = [
   {
     id: "testimonial-1",
-    name: "Glenn Selima",
+    name: "Glenn S.",
     role: "Property Owner",
-    rating: 5,
-    ratingText: "5.0 Ratings",
-    title: "Excellent Service & Support",
     quote:
-      "From the first consultation to receiving the keys, the entire process was smooth and stress-free. The team was professional, responsive, and genuinely cared about finding the right property for us. Highly recommended!",
+      "From the first consultation to receiving the keys, the process was clear and smooth. The team was responsive, helpful, and attentive to what we were looking for.",
     avatar: IMAGES.avatars.clientGlenn,
+    isSample: true,
   },
   {
     id: "testimonial-2",
-    name: "Marcus Vance",
-    role: "Real Estate Investor",
-    rating: 5,
-    ratingText: "5.0 Ratings",
-    title: "Unmatched Architectural Insight",
+    name: "Marcus V.",
+    role: "Property Buyer",
     quote:
-      "Architron presented opportunities before they ever touched public listings. Their deep market analysis and valuation models allowed us to secure a landmark modernist villa with absolute confidence.",
+      "We received straightforward advice and clear options from day one. Having someone knowledgeable to message whenever a question came up made the whole search simpler.",
     avatar: IMAGES.avatars.client2,
+    isSample: true,
   },
   {
     id: "testimonial-3",
-    name: "Elena Rostova",
-    role: "Private Collector & Homeowner",
-    rating: 5,
-    ratingText: "5.0 Ratings",
-    title: "Flawless Attention To Detail",
+    name: "Elena R.",
+    role: "Homeowner",
     quote:
-      "Finding an architect-designed home that aligned with our family's lifestyle felt impossible until we partnered with Architron. Transparent, proactive, and exceptionally refined throughout.",
+      "Finding a property that genuinely suited our family's routine took time, but we felt guided and supported at every stage without any pressure.",
     avatar: IMAGES.avatars.client3,
+    isSample: true,
   },
 ];

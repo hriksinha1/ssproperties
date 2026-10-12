@@ -8,37 +8,37 @@ export interface FAQItem {
 export const FAQS_DATA: FAQItem[] = [
   {
     id: "faq-1",
-    question: "How do I get started with buying a property?",
+    question: "How do I get started?",
     answer:
-      "Schedule a free consultation on our site, and our team will guide you through listings, financing, and the buying process.",
+      "Message us on WhatsApp or use the contact form. Tell us what you're looking for, your budget and your preferred areas, and we'll suggest where to begin.",
     defaultOpen: true,
   },
   {
     id: "faq-2",
-    question: "Do you help with mortgage pre-approval?",
+    question: "Can you help with a home loan?",
     answer:
-      "Yes, we collaborate closely with premier lending partners and private wealth mortgage advisors to ensure you obtain pre-approval with competitive terms before touring properties.",
+      "Loans are approved by banks and lenders, not by us. Message us if you'd like to know what to ask or prepare before you apply.",
     defaultOpen: false,
   },
   {
     id: "faq-3",
-    question: "What fees are involved in closing a deal?",
+    question: "What costs are involved in buying property?",
     answer:
-      "Standard closing costs typically encompass title insurance, escrow fees, transfer taxes, attorney representation, and recording charges. We provide an itemized financial roadmap before every transaction.",
+      "Costs vary by property and location and can include registration, taxes and fees. Ask us before you decide, and confirm the figures with a qualified professional.",
     defaultOpen: false,
   },
   {
     id: "faq-4",
-    question: "How do I schedule a property viewing or open house?",
+    question: "How do I arrange a viewing?",
     answer:
-      "Simply reach out through our contact form or click on any listing's direct inquiry button. We coordinate private, escorted architectural walk-throughs aligned with your schedule.",
+      "Message us the property you're interested in and a few times that suit you. We'll confirm what's possible.",
     defaultOpen: false,
   },
   {
     id: "faq-5",
     question: "Can I sell my current home while buying a new one?",
     answer:
-      "Yes. Our portfolio advisors structure bridge solutions, leaseback contingencies, and synchronized escrow timelines so you never face unnecessary displacement or carrying costs.",
+      "Often yes, but the timing needs planning. Message us your situation and we'll talk through the options.",
     defaultOpen: false,
   },
 ];

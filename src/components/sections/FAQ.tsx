@@ -36,7 +36,7 @@ export const FAQ: React.FC = () => {
       aria-labelledby="faq-heading"
       className="w-full py-16 sm:py-20 lg:py-24"
     >
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-12 sm:gap-16">
+      <div className="container-page flex flex-col gap-12 sm:gap-16">
         {/* Centered Heading */}
         <SectionHeading
           id="faq-heading"
@@ -59,8 +59,8 @@ export const FAQ: React.FC = () => {
                   key={item.id}
                   className={`rounded-[18px] transition-all duration-200 border ${
                     isOpen
-                      ? "bg-[#C8EFAE] border-[#A9E18A] shadow-sm"
-                      : "bg-white border-[#DCE8D5]/80 hover:border-[#0E170E]/20"
+                      ? "bg-accent border-accent-strong shadow-sm"
+                      : "bg-surface border-line hover:border-ink/20"
                   }`}
                 >
                   <h3>
@@ -74,15 +74,15 @@ export const FAQ: React.FC = () => {
                       aria-controls={panelId}
                       onClick={() => toggleFAQ(item.id)}
                       onKeyDown={(e) => handleKeyDown(e, idx)}
-                      className="w-full p-4 sm:p-5 flex items-center justify-between text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-[#0E170E] rounded-[18px]"
+                      className="w-full p-4 sm:p-5 flex items-center justify-between text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-[18px] min-h-[48px]"
                     >
-                      <span className="font-semibold text-sm sm:text-base text-[#0E170E] pr-4">
+                      <span className="font-semibold text-sm sm:text-base text-ink pr-4">
                         {item.question}
                       </span>
 
                       <div
                         className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
-                          isOpen ? "bg-[#0E170E] text-white" : "bg-[#0E170E] text-white"
+                          isOpen ? "bg-ink text-white" : "bg-ink text-white"
                         }`}
                       >
                         {isOpen ? (
@@ -94,17 +94,18 @@ export const FAQ: React.FC = () => {
                     </button>
                   </h3>
 
-                  {/* Accessible Collapsible Container */}
+                  {/* Accessible Collapsible Container without landmark noise */}
                   <div
                     id={panelId}
-                    role="region"
                     aria-labelledby={btnId}
+                    inert={!isOpen ? true : undefined}
+                    aria-hidden={!isOpen}
                     className={`grid transition-[grid-template-rows] duration-250 ease-out ${
                       isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#0E170E]/80 leading-relaxed border-t border-[#0E170E]/10">
+                      <div className="px-5 pb-5 pt-1 text-sm text-ink/90 leading-relaxed border-t border-ink/10">
                         {item.answer}
                       </div>
                     </div>

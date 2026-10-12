@@ -27,10 +27,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className="w-full flex flex-col gap-1.5 text-left">
-        <label htmlFor={inputId} className="text-xs font-medium text-white/90">
+        <label htmlFor={inputId} className="text-sm font-medium text-white">
           {label}
           {required && (
-            <span className="text-rose-400 ml-1" aria-hidden="true">
+            <span className="text-accent ml-1" aria-hidden="true">
               *
             </span>
           )}
@@ -42,8 +42,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           required={required}
           aria-invalid={!!error}
           aria-describedby={error ? errorId : helperText ? helperId : undefined}
-          className={`w-full min-h-[48px] px-4 py-2.5 rounded-[14px] bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm focus:outline-none focus:border-[#C8EFAE] focus:ring-1 focus:ring-[#C8EFAE] transition-all backdrop-blur-xs ${
-            error ? "border-rose-400/80 ring-1 ring-rose-400/80" : ""
+          className={`w-full min-h-[48px] px-4 py-2.5 rounded-[14px] bg-white/10 border border-white/20 text-white placeholder-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-accent transition-all ${
+            error ? "border-rose-400 ring-1 ring-rose-400" : ""
           } ${className}`}
           {...props}
         />
@@ -58,7 +58,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           </span>
         )}
         {!error && helperText && (
-          <span id={helperId} className="text-xs text-white/60 mt-0.5">
+          <span id={helperId} className="text-xs text-white/70 mt-0.5">
             {helperText}
           </span>
         )}
@@ -95,10 +95,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     return (
       <div className="w-full flex flex-col gap-1.5 text-left">
-        <label htmlFor={textareaId} className="text-xs font-medium text-white/90">
+        <label htmlFor={textareaId} className="text-sm font-medium text-white">
           {label}
           {required && (
-            <span className="text-rose-400 ml-1" aria-hidden="true">
+            <span className="text-accent ml-1" aria-hidden="true">
               *
             </span>
           )}
@@ -110,8 +110,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           required={required}
           aria-invalid={!!error}
           aria-describedby={error ? errorId : helperText ? helperId : undefined}
-          className={`w-full p-4 rounded-[14px] bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm focus:outline-none focus:border-[#C8EFAE] focus:ring-1 focus:ring-[#C8EFAE] transition-all backdrop-blur-xs resize-none ${
-            error ? "border-rose-400/80 ring-1 ring-rose-400/80" : ""
+          className={`w-full p-4 rounded-[14px] bg-white/10 border border-white/20 text-white placeholder-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-accent transition-all resize-none ${
+            error ? "border-rose-400 ring-1 ring-rose-400" : ""
           } ${className}`}
           {...props}
         />
@@ -126,7 +126,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           </span>
         )}
         {!error && helperText && (
-          <span id={helperId} className="text-xs text-white/60 mt-0.5">
+          <span id={helperId} className="text-xs text-white/70 mt-0.5">
             {helperText}
           </span>
         )}

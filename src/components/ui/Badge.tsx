@@ -16,11 +16,11 @@ export const Badge: React.FC<BadgeProps> = ({
   className = "",
 }) => {
   const variantStyles = {
-    white: "bg-white/95 text-[#0E170E] shadow-xs backdrop-blur-xs",
-    accent: "bg-[#C8EFAE] text-[#0E170E]",
-    dark: "bg-[#0E170E] text-white",
-    outline: "border border-[#DCE8D5] bg-white/80 text-[#0E170E]",
-    tint: "bg-[#E8F5DE] text-[#0E170E] border border-[#DCE8D5]/60",
+    white: "bg-surface/95 text-ink shadow-xs backdrop-blur-xs",
+    accent: "bg-accent text-ink",
+    dark: "bg-ink text-white",
+    outline: "border border-line bg-surface/80 text-ink",
+    tint: "bg-tint text-ink border border-line",
   };
 
   return (

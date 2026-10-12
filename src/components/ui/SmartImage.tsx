@@ -19,6 +19,8 @@ export const SmartImage: React.FC<SmartImageProps> = ({
   isHero = false,
   className = "",
   style,
+  srcSet,
+  sizes,
   ...props
 }) => {
   const [hasError, setHasError] = useState(false);
@@ -26,7 +28,7 @@ export const SmartImage: React.FC<SmartImageProps> = ({
   if (hasError) {
     return (
       <div
-        className={`w-full h-full bg-[#E8F5DE] border border-[#DCE8D5] flex flex-col items-center justify-center p-4 text-[#566356] select-none ${className}`}
+        className={`w-full h-full bg-tint border border-line flex flex-col items-center justify-center p-4 text-ink-muted select-none ${className}`}
         style={{
           aspectRatio: aspectRatio || undefined,
           ...style,
@@ -34,7 +36,7 @@ export const SmartImage: React.FC<SmartImageProps> = ({
         role="img"
         aria-label={alt}
       >
-        <Building2 className="w-8 h-8 text-[#566356]/60 mb-2" aria-hidden="true" />
+        <Building2 className="w-8 h-8 text-ink-muted/60 mb-2" aria-hidden="true" />
         <span className="text-xs font-medium tracking-wide uppercase">{subjectName}</span>
       </div>
     );
@@ -43,6 +45,8 @@ export const SmartImage: React.FC<SmartImageProps> = ({
   return (
     <img
       src={src}
+      srcSet={srcSet}
+      sizes={sizes}
       alt={alt}
       loading={isHero ? undefined : "lazy"}
       decoding="async"

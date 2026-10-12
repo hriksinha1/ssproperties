@@ -11,24 +11,24 @@ export const SERVICES_DATA: ServiceAccordionItem[] = [
     id: "service-1",
     numeral: "01",
     title: "Local Expertise",
-    summary: "Know the neighborhoods, understand the market",
+    summary: "Know the area before you visit.",
     detail:
-      "Deep-rooted intelligence across prime coastal, hillside, and urban enclaves ensures you make moves grounded in genuine micro-market trends and off-market foresight.",
+      "Tell us the areas, budget and timeline you have in mind. We'll help you see what's available and what's realistic.",
   },
   {
     id: "service-2",
     numeral: "02",
     title: "Curated Selection",
-    summary: "Architectural distinction and uncompromising quality",
+    summary: "A shortlist, not a flood of listings.",
     detail:
-      "We filter out the ordinary. Every property presented is rigorously evaluated for spatial proportion, construction pedigree, and long-term asset resilience.",
+      "Share what matters to you and we'll suggest properties that fit, so you spend time on the ones worth visiting.",
   },
   {
     id: "service-3",
     numeral: "03",
     title: "Personal Guidance",
-    summary: "Bespoke representation from first tour to final closing",
+    summary: "Someone to ask at every step.",
     detail:
-      "Experience discretion, dedicated advisory, and seamless transaction management tailored around your timeline, lifestyle goals, and investment preferences.",
+      "Message us any time about a property, a viewing or the process, and we'll explain what comes next.",
   },
 ];

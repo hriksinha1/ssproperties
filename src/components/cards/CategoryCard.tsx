@@ -10,28 +10,28 @@ export interface CategoryCardProps {
 
 export const CategoryCard: React.FC<CategoryCardProps> = ({ category, onExplore }) => {
   return (
-    <article
-      tabIndex={0}
-      className="group relative rounded-[24px] overflow-hidden bg-[#0E170E] min-h-[440px] md:min-h-[460px] flex flex-col justify-end p-6 md:p-8 text-left transition-all duration-300 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-[#0E170E] focus-visible:outline-offset-4 cursor-pointer"
-      onClick={() => onExplore?.(category)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onExplore?.(category);
+    <a
+      href="#properties"
+      onClick={(e) => {
+        if (onExplore) {
+          onExplore(category);
         }
       }}
-      aria-label={`Explore ${category.title}: ${category.subtitle}`}
+      className="group relative rounded-card overflow-hidden bg-ink min-h-[clamp(360px,52vw,480px)] flex flex-col justify-end p-6 md:p-8 text-left transition-all duration-300 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-4 cursor-pointer block"
+      aria-label={`${category.title}: ${category.subtitle}. ${category.ctaText}`}
     >
       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden">
         <SmartImage
           src={category.image}
+          srcSet={category.srcSet}
           alt={category.imageAlt}
           subjectName={category.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
         />
+        {/* Strengthened dark gradient for 4.5:1 text contrast */}
         <div
-          className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10"
+          className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/20"
           aria-hidden="true"
         />
       </div>
@@ -41,18 +41,18 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category, onExplore 
         <h3 className="font-display uppercase text-3xl md:text-4xl text-white tracking-wide leading-none">
           {category.title}
         </h3>
-        <p className="text-sm text-white/80 font-normal leading-relaxed mb-3">
+        <p className="text-sm text-white/90 font-normal leading-relaxed mb-3">
           {category.subtitle}
         </p>
 
-        {/* Explore Now Pill */}
-        <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/20 hover:bg-white/30 text-white backdrop-blur-md transition-all text-xs font-medium border border-white/20 group-hover:bg-[#C8EFAE] group-hover:text-[#0E170E] group-hover:border-[#C8EFAE]">
-          <span>Explore Now</span>
-          <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-[#0E170E] group-hover:text-white transition-colors">
+        {/* CTA Pill */}
+        <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/20 text-white transition-all text-xs font-semibold border border-white/25 group-hover:bg-accent group-hover:text-ink group-hover:border-accent">
+          <span>{category.ctaText}</span>
+          <span className="w-5 h-5 rounded-full bg-white/25 flex items-center justify-center group-hover:bg-ink group-hover:text-white transition-colors">
             <ArrowRight className="w-3 h-3" />
           </span>
         </div>
       </div>
-    </article>
+    </a>
   );
 };

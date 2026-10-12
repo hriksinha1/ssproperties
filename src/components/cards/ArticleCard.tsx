@@ -8,46 +8,46 @@ export interface ArticleCardProps {
   onRead?: (article: ArticleItem) => void;
 }
 
-export const ArticleCard: React.FC<ArticleCardProps> = ({ article, onRead }) => {
+export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
   return (
-    <article
-      tabIndex={0}
-      className="group rounded-[24px] bg-white p-3.5 md:p-4 shadow-[0_8px_30px_rgba(15,30,15,0.06)] border border-[#DCE8D5]/60 flex flex-col justify-between transition-all duration-300 hover:shadow-[0_16px_36px_rgba(15,30,15,0.12)] hover:-translate-y-1 text-left focus-visible:outline-2 focus-visible:outline-[#0E170E] focus-visible:outline-offset-2"
-      aria-label={`${article.title}, published ${article.date}`}
-    >
+    <article className="group rounded-card bg-surface p-4 shadow-card border border-line flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-1 text-left">
       <div>
         {/* Photo */}
-        <div className="relative aspect-[16/10] rounded-[16px] overflow-hidden bg-[#E8F5DE] mb-4">
+        <div className="relative aspect-[16/10] rounded-[16px] overflow-hidden bg-tint mb-4">
           <SmartImage
             src={article.image}
+            srcSet={article.srcSet}
             alt={article.imageAlt}
             subjectName={article.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
         </div>
 
-        {/* Metadata */}
-        <div className="flex items-center gap-2 text-xs font-semibold text-[#566356] uppercase tracking-wider mb-2">
-          <span className="text-[#0E170E] font-semibold">{article.tag}</span>
-          <span aria-hidden="true">•</span>
-          <span>{article.date}</span>
+        {/* Metadata Topic Tag */}
+        <div className="flex items-center gap-2 text-xs font-semibold text-ink uppercase tracking-wider mb-2">
+          <span>{article.tag}</span>
         </div>
 
         {/* Title */}
-        <h3 className="text-base md:text-lg font-semibold text-[#0E170E] leading-snug line-clamp-2 mb-4 group-hover:text-emerald-950 transition-colors">
+        <h3 className="text-base md:text-lg font-semibold text-ink leading-snug line-clamp-2 mb-4">
           {article.title}
         </h3>
       </div>
 
-      {/* Soft Green Explore Now Button */}
-      <button
-        type="button"
-        onClick={() => onRead?.(article)}
-        className="w-full py-2.5 px-4 rounded-full bg-[#E8F5DE] hover:bg-[#C8EFAE] text-[#0E170E] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer min-h-[42px]"
-      >
-        <span>Explore Now</span>
-        <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
-      </button>
+      {/* Real link or Coming Soon pill */}
+      {article.href ? (
+        <a
+          href={article.href}
+          className="w-full py-2.5 px-4 rounded-full bg-tint hover:bg-accent text-ink text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer min-h-[44px] focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+        >
+          <span>Read guide</span>
+          <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
+        </a>
+      ) : (
+        <div className="w-full py-2.5 px-4 rounded-full bg-tint/60 text-ink-muted text-xs font-medium flex items-center justify-center min-h-[44px] select-none border border-line/60">
+          <span>Coming soon</span>
+        </div>
+      )}
     </article>
   );
 };

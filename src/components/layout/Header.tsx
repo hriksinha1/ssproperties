@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
-import { MessageSquare, Bell, User, Menu } from "lucide-react";
-import { BRAND_NAME, NAV_LINKS, NavLink } from "../../config/site";
-import { CircleIconButton } from "../ui/CircleIconButton";
+import { MessageCircle, Menu } from "lucide-react";
+import { BRAND_NAME, NAV_LINKS, NavLink, WHATSAPP_URL } from "../../config/site";
 import { MobileNav } from "./MobileNav";
 
 export interface HeaderProps {
@@ -20,29 +19,39 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
     }
   };
 
+  // Map active section id to navigation link id
+  const getActiveNavId = (sec: string) => {
+    if (sec === "about") return "about";
+    if (sec === "properties" || sec === "lifestyle") return "properties";
+    if (["contact", "faq", "blog", "testimonials"].includes(sec)) return "contact";
+    return "hero";
+  };
+
+  const activeNavId = getActiveNavId(activeSection);
+
   return (
     <header className="absolute top-0 inset-x-0 z-30 pt-6 md:pt-8">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Left: lowercase wordmark */}
+      <div className="container-page flex items-center justify-between">
+        {/* Left: wordmark rendered exactly as Inter 600 with no lowercase transform */}
         <a
           href="#hero"
           onClick={(e) => {
             e.preventDefault();
             handleSmoothScroll("#hero");
           }}
-          className="text-white text-xl md:text-2xl font-semibold tracking-[-0.03em] lowercase select-none focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-4 rounded-md"
+          className="text-white text-xl md:text-2xl font-semibold tracking-[-0.02em] select-none focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-4 rounded-md"
           aria-label={`${BRAND_NAME} Home`}
         >
-          {BRAND_NAME.toLowerCase()}
+          {BRAND_NAME}
         </a>
 
         {/* Center: pill-shaped navigation group */}
         <nav
-          className="hidden md:flex items-center gap-1 bg-black/40 backdrop-blur-md px-1.5 py-1.5 rounded-full border border-white/15 shadow-sm"
+          className="hidden md:flex items-center gap-1 bg-black/45 backdrop-blur-md px-2 py-1.5 rounded-full border border-white/20 shadow-sm"
           aria-label="Main Navigation"
         >
           {NAV_LINKS.map((link: NavLink) => {
-            const isActive = activeSection === link.id;
+            const isActive = activeNavId === link.id;
             return (
               <a
                 key={link.id}
@@ -52,10 +61,10 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                   e.preventDefault();
                   handleSmoothScroll(link.href);
                 }}
-                className={`px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 select-none ${
+                className={`px-4 py-2 min-h-[40px] text-sm font-medium rounded-full transition-all duration-200 select-none inline-flex items-center justify-center ${
                   isActive
-                    ? "bg-[#C8EFAE] text-[#0E170E] font-semibold shadow-xs"
-                    : "text-white/85 hover:text-white hover:bg-white/10"
+                    ? "bg-accent text-ink font-semibold shadow-xs"
+                    : "text-white/90 hover:text-white hover:bg-white/10"
                 }`}
               >
                 {link.label}
@@ -64,51 +73,32 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
           })}
         </nav>
 
-        {/* Right: three circular utility icon buttons */}
-        <div className="hidden md:flex items-center gap-2">
-          <CircleIconButton
-            variant="translucent-dark"
-            size="sm"
-            aria-label="Contact messages"
-            onClick={() => handleSmoothScroll("#contact")}
-            title="Messages"
+        {/* Right: Desktop pill button "Chat on WhatsApp" */}
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with SSProperty on WhatsApp (opens in a new tab)"
+            className="inline-flex items-center gap-2 px-5 py-2.5 min-h-[42px] rounded-full bg-accent hover:bg-accent-strong text-ink text-xs font-semibold tracking-wide transition-colors shadow-sm focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
           >
-            <MessageSquare className="w-4 h-4" />
-          </CircleIconButton>
-
-          <CircleIconButton
-            variant="translucent-dark"
-            size="sm"
-            aria-label="Property alerts and notifications"
-            onClick={() => handleSmoothScroll("#properties")}
-            title="Notifications"
-          >
-            <Bell className="w-4 h-4" />
-          </CircleIconButton>
-
-          <CircleIconButton
-            variant="translucent-dark"
-            size="sm"
-            aria-label="Agent consultation profile"
-            onClick={() => handleSmoothScroll("#contact")}
-            title="Profile"
-          >
-            <User className="w-4 h-4" />
-          </CircleIconButton>
+            <MessageCircle className="w-4 h-4" aria-hidden="true" />
+            <span>Chat on WhatsApp</span>
+          </a>
         </div>
 
         {/* Mobile Hamburger button */}
         <div className="flex md:hidden">
-          <CircleIconButton
+          <button
             ref={triggerRef}
-            variant="translucent-dark"
-            size="sm"
+            type="button"
             aria-label="Open mobile navigation menu"
             aria-expanded={isMobileOpen}
             onClick={() => setIsMobileOpen(true)}
+            className="w-11 h-11 rounded-full bg-black/50 text-white flex items-center justify-center backdrop-blur-md border border-white/20 hover:bg-black/70 cursor-pointer focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
           >
-            <Menu className="w-5 h-5 text-white" />
-          </CircleIconButton>
+            <Menu className="w-5 h-5 text-white" aria-hidden="true" />
+          </button>
         </div>
       </div>
 
@@ -116,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
       <MobileNav
         isOpen={isMobileOpen}
         onClose={() => setIsMobileOpen(false)}
-        activeSection={activeSection}
+        activeSection={activeNavId}
         onNavigate={handleSmoothScroll}
         triggerRef={triggerRef}
       />
