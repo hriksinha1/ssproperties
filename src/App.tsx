@@ -8,12 +8,12 @@ import { Articles } from "./components/sections/Articles";
 import { FAQ } from "./components/sections/FAQ";
 import { ContactCTA } from "./components/sections/ContactCTA";
 import { Footer } from "./components/layout/Footer";
-import { LISTINGS_DATA, PropertyListing, PropertyType, formatListingPrice } from "./data/listings";
+import { LISTINGS_DATA, PropertyListing, PropertyType, formatListingPrice, formatFullIndianPrice } from "./data/listings";
 import { SearchDraftState } from "./components/sections/PropertySearch";
 import { LifestyleCategory } from "./data/categories";
 import { Dialog } from "./components/ui/Dialog";
 import { SmartImage } from "./components/ui/SmartImage";
-import { Bed, Bath, Maximize2, MapPin, MessageCircle } from "lucide-react";
+import { Bed, Bath, Maximize2, MapPin, MessageCircle, CheckCircle2 } from "lucide-react";
 import { BRAND_NAME, WHATSAPP_URL, PRICE_BANDS, AREA_UNIT, SAMPLE_CONTENT } from "./config/site";
 
 export interface ListingFilters {
@@ -74,9 +74,13 @@ export default function App() {
         return false;
       }
 
-      // Location filter
-      if (filters.location !== "all" && item.city.toLowerCase() !== filters.location.toLowerCase()) {
-        return false;
+      // Location / Locality filter
+      if (filters.location !== "all") {
+        const matchesLocality = item.locality.toLowerCase() === filters.location.toLowerCase();
+        const matchesCity = item.city.toLowerCase() === filters.location.toLowerCase();
+        if (!matchesLocality && !matchesCity) {
+          return false;
+        }
       }
 
       // Property type filter
@@ -92,11 +96,11 @@ export default function App() {
         }
       }
 
-      // Bedrooms filter
+      // Bedrooms / BHK filter
       if (filters.bedrooms !== "any") {
-        if (filters.bedrooms === "1-2" && (item.beds < 1 || item.beds > 2)) return false;
-        if (filters.bedrooms === "3-4" && (item.beds < 3 || item.beds > 4)) return false;
-        if (filters.bedrooms === "5-plus" && item.beds < 5) return false;
+        if (filters.bedrooms === "2" && item.beds !== 2) return false;
+        if (filters.bedrooms === "3" && item.beds !== 3) return false;
+        if (filters.bedrooms === "4-plus" && item.beds < 4) return false;
       }
 
       return true;
@@ -254,9 +258,12 @@ export default function App() {
 
           <div className="p-6 sm:p-8 flex flex-col gap-5 text-left">
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-semibold text-ink-muted uppercase tracking-wider">
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
+                <span className="text-xs font-bold text-ink-muted uppercase tracking-wider">
                   {selectedProperty.status} · {selectedProperty.propertyType}
+                </span>
+                <span className="px-2 py-0.5 rounded text-xs font-semibold bg-accent text-ink">
+                  {selectedProperty.bhkConfig}
                 </span>
                 {SAMPLE_CONTENT && selectedProperty.isSample && (
                   <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-tint text-ink border border-line">
@@ -273,36 +280,62 @@ export default function App() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between py-3.5 border-y border-line text-xs sm:text-sm font-medium text-ink-muted flex-wrap gap-2">
-              <span className="inline-flex items-center gap-1.5">
-                <Bed className="w-4 h-4 text-ink" aria-hidden="true" />
-                <span>{selectedProperty.beds} Bedrooms</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Bath className="w-4 h-4 text-ink" aria-hidden="true" />
-                <span>{selectedProperty.baths} Bathrooms</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Maximize2 className="w-4 h-4 text-ink" aria-hidden="true" />
-                <span>{selectedProperty.areaSqFt} {AREA_UNIT}</span>
-              </span>
+            {/* Indian Real Estate Dimensions & Specs */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 py-3.5 border-y border-line text-xs sm:text-sm font-medium text-ink-muted">
+              {selectedProperty.beds > 0 && (
+                <div className="flex items-center gap-2">
+                  <Bed className="w-4 h-4 text-ink shrink-0" aria-hidden="true" />
+                  <span>{selectedProperty.bhkConfig}</span>
+                </div>
+              )}
+              {selectedProperty.baths > 0 && (
+                <div className="flex items-center gap-2">
+                  <Bath className="w-4 h-4 text-ink shrink-0" aria-hidden="true" />
+                  <span>{selectedProperty.baths} Bathrooms</span>
+                </div>
+              )}
+              <div className="flex items-center gap-2">
+                <Maximize2 className="w-4 h-4 text-ink shrink-0" aria-hidden="true" />
+                <span>{selectedProperty.superBuiltUpSqFt} {AREA_UNIT} (Super)</span>
+              </div>
+              {selectedProperty.carpetAreaSqFt && (
+                <div className="flex items-center gap-2 col-span-2 sm:col-span-1 text-ink font-medium">
+                  <Maximize2 className="w-4 h-4 text-ink shrink-0" aria-hidden="true" />
+                  <span>{selectedProperty.carpetAreaSqFt} {AREA_UNIT} Carpet</span>
+                </div>
+              )}
             </div>
+
+            {/* Highlights */}
+            {selectedProperty.highlights && (
+              <div className="flex items-start gap-2 text-xs sm:text-sm text-ink-muted bg-tint/60 p-3 rounded-xl border border-line">
+                <CheckCircle2 className="w-4 h-4 text-ink shrink-0 mt-0.5" aria-hidden="true" />
+                <span>{selectedProperty.highlights}</span>
+              </div>
+            )}
 
             <div className="flex items-center justify-between pt-1 flex-wrap gap-4">
               <div>
-                <span className="text-xs text-ink-muted block">Price</span>
-                <span className="font-semibold text-xl sm:text-2xl text-ink tabular-nums">
-                  {formatListingPrice(selectedProperty.price)}
-                </span>
+                <span className="text-xs text-ink-muted block font-medium">Estimated Pricing</span>
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  <span className="font-bold text-2xl sm:text-3xl text-ink tabular-nums">
+                    {formatListingPrice(selectedProperty.price, selectedProperty.status)}
+                  </span>
+                  {selectedProperty.status !== "For Rent" && (
+                    <span className="text-xs text-ink-muted">
+                      ({formatFullIndianPrice(selectedProperty.price)})
+                    </span>
+                  )}
+                </div>
               </div>
 
               <a
                 href={`${WHATSAPP_URL}?text=${encodeURIComponent(
-                  `Hi ${BRAND_NAME}, I'd like to ask about ${selectedProperty.title} (${selectedProperty.location}).`
+                  `Hi ${BRAND_NAME}, I would like to inquire about ${selectedProperty.title} (${selectedProperty.location}, ${selectedProperty.bhkConfig}).`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 rounded-full bg-accent hover:bg-accent-strong text-ink text-xs sm:text-sm font-semibold inline-flex items-center gap-2 transition-colors min-h-[44px] focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+                className="px-6 py-3 rounded-full bg-accent hover:bg-accent-strong text-ink text-xs sm:text-sm font-semibold inline-flex items-center gap-2 transition-colors min-h-[44px] shadow-xs focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
               >
                 <MessageCircle className="w-4 h-4" aria-hidden="true" />
                 <span>Ask about this property</span>

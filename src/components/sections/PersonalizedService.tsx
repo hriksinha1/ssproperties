@@ -25,7 +25,7 @@ export const PersonalizedService: React.FC = () => {
           align="center"
           titleLine1="Property Is Personal."
           titleLine2="Finding It Should Be Too."
-          description="We help you narrow down options, compare properties and understand the next step, from your first question to your final decision."
+          description="We help you compare localities across Kolkata, review legal checks and schedule site visits, from your first question to your final decision."
         />
 
         {/* Asymmetrical 2-Column Editorial Layout (5/12 Left, 7/12 Right) */}

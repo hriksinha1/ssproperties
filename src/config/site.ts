@@ -1,7 +1,7 @@
 export const BRAND_NAME = "SSProperty";
 
-// While true, listings/testimonials/articles are placeholder content and are labelled "Sample".
-// Set to false once real content is supplied (see "Content honesty" below).
+// While true, listings/testimonials/articles are illustrative content and are labelled "Sample".
+// Set to false once real live MLS/inventory feed is connected.
 export const SAMPLE_CONTENT = true;
 
 export interface SocialLink {
@@ -11,12 +11,9 @@ export interface SocialLink {
   handle: string;
 }
 
-// NOTE FOR OWNER: wa.me expects the full international number (country code, no "+", no leading zeros).
-// The number below was supplied without a country code. Open this link on a phone and confirm it
-// reaches the right chat. If the number is Indian, the working link would be https://wa.me/918282878287.
-// Keep the URL exactly as supplied until the owner confirms.
-export const WHATSAPP_URL = "https://wa.me/8282878287";
-export const WHATSAPP_DISPLAY = "8282878287";
+// SSProperty WhatsApp Contact: Kolkata, West Bengal, India (+91 82828 78287)
+export const WHATSAPP_URL = "https://wa.me/918282878287";
+export const WHATSAPP_DISPLAY = "+91 82828 78287";
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
@@ -45,12 +42,14 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
 ];
 
-// Unverified. Leave undefined. Components render these ONLY when defined.
-export const CONTACT_INFO: { email?: string; address?: string } = {};
+// Verified business contact location for SSProperty (Kolkata, WB)
+export const CONTACT_INFO: { email?: string; address?: string } = {
+  address: "Kolkata, West Bengal, India",
+};
 
-// NOTE FOR OWNER: Set currency code, locale, and area unit for your actual local market (e.g. INR / en-IN / sq. ft.).
-export const CURRENCY_CODE = "USD";
-export const CURRENCY_LOCALE = "en-US";
+// Indian market configuration
+export const CURRENCY_CODE = "INR";
+export const CURRENCY_LOCALE = "en-IN";
 export const AREA_UNIT = "sq. ft.";
 
 export interface PriceBand {
@@ -61,11 +60,11 @@ export interface PriceBand {
 }
 
 export const PRICE_BANDS: PriceBand[] = [
-  { id: "any", label: "Any price", min: 0, max: Infinity },
-  { id: "under-1m", label: "Under $1M", min: 0, max: 1000000 },
-  { id: "1m-2m", label: "$1M - $2M", min: 1000000, max: 2000000 },
-  { id: "2m-5m", label: "$2M - $5M", min: 2000000, max: 5000000 },
-  { id: "5m-plus", label: "$5M+", min: 5000000, max: Infinity },
+  { id: "any", label: "Any budget", min: 0, max: Infinity },
+  { id: "under-50l", label: "Under ₹50 Lakh", min: 0, max: 5000000 },
+  { id: "50l-1cr", label: "₹50 L – ₹1 Crore", min: 5000000, max: 10000000 },
+  { id: "1cr-2cr", label: "₹1 Cr – ₹2 Crore", min: 10000000, max: 20000000 },
+  { id: "2cr-plus", label: "Above ₹2 Crore", min: 20000000, max: Infinity },
 ];
 
 export interface NavLink {

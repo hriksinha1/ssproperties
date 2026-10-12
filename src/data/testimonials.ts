@@ -12,28 +12,28 @@ export interface TestimonialItem {
 export const TESTIMONIALS_DATA: TestimonialItem[] = [
   {
     id: "testimonial-1",
-    name: "Glenn S.",
-    role: "Property Owner",
+    name: "A. Banerjee",
+    role: "Flat Owner, New Town",
     quote:
-      "From the first consultation to receiving the keys, the process was clear and smooth. The team was responsive, helpful, and attentive to what we were looking for.",
-    avatar: IMAGES.avatars.clientGlenn,
+      "From shortlisting 3 BHK projects near Action Area II to finalizing the legal paperwork, SSProperty gave us clear guidance without any pressure. Highly dependable team.",
+    avatar: IMAGES.avatars.client1,
     isSample: true,
   },
   {
     id: "testimonial-2",
-    name: "Marcus V.",
-    role: "Property Buyer",
+    name: "R. Mukherjee",
+    role: "Homebuyer, Rajarhat",
     quote:
-      "We received straightforward advice and clear options from day one. Having someone knowledgeable to message whenever a question came up made the whole search simpler.",
+      "We needed a ready-to-move 2 BHK flat close to the metro line. The team scheduled site visits promptly and helped us compare pricing per square foot across three complexes.",
     avatar: IMAGES.avatars.client2,
     isSample: true,
   },
   {
     id: "testimonial-3",
-    name: "Elena R.",
-    role: "Homeowner",
+    name: "S. Sen & Family",
+    role: "Property Investor, South Kolkata",
     quote:
-      "Finding a property that genuinely suited our family's routine took time, but we felt guided and supported at every stage without any pressure.",
+      "Having someone directly on WhatsApp to answer questions regarding mutation, developer track records, and rental yields made our decision simple and stress-free.",
     avatar: IMAGES.avatars.client3,
     isSample: true,
   },

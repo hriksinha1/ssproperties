@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import { MapPin, Building2, Tag, Bed, ChevronDown, Search, MessageCircle, RotateCcw } from "lucide-react";
 import { LISTINGS_DATA } from "../../data/listings";
 import { PRICE_BANDS, WHATSAPP_URL } from "../../config/site";
@@ -34,10 +34,10 @@ export const PropertySearch: React.FC<PropertySearchProps> = ({
 
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Unique cities from listings data
-  const cityOptions = useMemo(() => {
+  // Unique localities from Kolkata listings data
+  const localityOptions = useMemo(() => {
     const set = new Set<string>();
-    LISTINGS_DATA.forEach((item) => set.add(item.city));
+    LISTINGS_DATA.forEach((item) => set.add(item.locality));
     return Array.from(set).sort();
   }, []);
 
@@ -116,39 +116,41 @@ export const PropertySearch: React.FC<PropertySearchProps> = ({
           <div
             role="tabpanel"
             aria-labelledby="tab-sell"
-            className="py-8 px-2 sm:px-4 flex flex-col sm:flex-row items-center justify-between gap-6 bg-tint rounded-2xl my-4 border border-line"
+            className="py-8 px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6 bg-tint rounded-2xl my-4 border border-line"
           >
             <div className="flex flex-col gap-1 text-left max-w-xl">
-              <h3 className="text-base sm:text-lg font-semibold text-ink">
-                Thinking of selling or renting out a property?
+              <h3 className="text-base sm:text-lg font-bold text-ink">
+                Looking to sell or lease out your property in Kolkata?
               </h3>
               <p className="text-sm text-ink-muted leading-relaxed">
-                Tell us about your property, timeline and location on WhatsApp, and our team will guide you through current market interest.
+                Share your property configuration, location (New Town, Rajarhat, South Kolkata, etc.), and expected timeline on WhatsApp. We will help with valuation and genuine buyer inquiries.
               </p>
             </div>
 
             <a
-              href={WHATSAPP_URL}
+              href={`${WHATSAPP_URL}?text=${encodeURIComponent(
+                "Hi SSProperty, I want to sell/lease my property in Kolkata. Here are the details:"
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 rounded-full bg-accent hover:bg-accent-strong text-ink text-xs sm:text-sm font-semibold tracking-wide inline-flex items-center gap-2 transition-colors shrink-0 shadow-sm min-h-[44px] focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
             >
               <MessageCircle className="w-4 h-4" aria-hidden="true" />
-              <span>Tell us on WhatsApp</span>
+              <span>Connect on WhatsApp</span>
             </a>
           </div>
         ) : (
           /* Row 2 & 3: Standard Search Controls Grid */
           <div role="tabpanel" aria-labelledby={`tab-${tab.toLowerCase().replace(/\s+/g, "-")}`}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-5 lg:divide-x divide-line">
-              {/* Location */}
+              {/* Locality */}
               <div className="flex flex-col gap-1.5 lg:px-4 first:lg:pl-0">
                 <label
                   htmlFor="search-location"
                   className="text-xs font-medium text-ink-muted flex items-center gap-1.5"
                 >
                   <MapPin className="w-3.5 h-3.5 text-ink" aria-hidden="true" />
-                  <span>Location</span>
+                  <span>Locality</span>
                 </label>
                 <div className="relative">
                   <select
@@ -157,10 +159,10 @@ export const PropertySearch: React.FC<PropertySearchProps> = ({
                     onChange={(e) => setLocation(e.target.value)}
                     className="w-full appearance-none bg-surface border border-line-strong rounded-xl text-sm font-semibold text-ink py-2.5 px-3 pr-8 focus:outline-none focus:ring-2 focus:ring-ink cursor-pointer min-h-[44px]"
                   >
-                    <option value="all">All locations</option>
-                    {cityOptions.map((city) => (
-                      <option key={city} value={city}>
-                        {city}
+                    <option value="all">All Kolkata localities</option>
+                    {localityOptions.map((loc) => (
+                      <option key={loc} value={loc}>
+                        {loc}
                       </option>
                     ))}
                   </select>
@@ -188,11 +190,11 @@ export const PropertySearch: React.FC<PropertySearchProps> = ({
                     className="w-full appearance-none bg-surface border border-line-strong rounded-xl text-sm font-semibold text-ink py-2.5 px-3 pr-8 focus:outline-none focus:ring-2 focus:ring-ink cursor-pointer min-h-[44px]"
                   >
                     <option value="all">All property types</option>
-                    <option value="Apartment">Apartment</option>
-                    <option value="House">House</option>
-                    <option value="Villa">Villa</option>
-                    <option value="Land">Land</option>
-                    <option value="Office">Office</option>
+                    <option value="Apartment">Apartment / Flat</option>
+                    <option value="House">Independent House</option>
+                    <option value="Villa">Row Villa</option>
+                    <option value="Land">Plot / Land</option>
+                    <option value="Office">Commercial Office</option>
                   </select>
                   <ChevronDown
                     className="w-4 h-4 text-ink-muted absolute right-3 top-3.5 pointer-events-none"
@@ -208,7 +210,7 @@ export const PropertySearch: React.FC<PropertySearchProps> = ({
                   className="text-xs font-medium text-ink-muted flex items-center gap-1.5"
                 >
                   <Tag className="w-3.5 h-3.5 text-ink" aria-hidden="true" />
-                  <span>Price range</span>
+                  <span>Budget (INR)</span>
                 </label>
                 <div className="relative">
                   <select
@@ -230,14 +232,14 @@ export const PropertySearch: React.FC<PropertySearchProps> = ({
                 </div>
               </div>
 
-              {/* Bedrooms */}
+              {/* Bedrooms / BHK */}
               <div className="flex flex-col gap-1.5 lg:px-4 last:lg:pr-0">
                 <label
                   htmlFor="search-bedrooms"
                   className="text-xs font-medium text-ink-muted flex items-center gap-1.5"
                 >
                   <Bed className="w-3.5 h-3.5 text-ink" aria-hidden="true" />
-                  <span>Bedrooms</span>
+                  <span>Configuration</span>
                 </label>
                 <div className="relative">
                   <select
@@ -246,10 +248,10 @@ export const PropertySearch: React.FC<PropertySearchProps> = ({
                     onChange={(e) => setBedrooms(e.target.value)}
                     className="w-full appearance-none bg-surface border border-line-strong rounded-xl text-sm font-semibold text-ink py-2.5 px-3 pr-8 focus:outline-none focus:ring-2 focus:ring-ink cursor-pointer min-h-[44px]"
                   >
-                    <option value="any">Any bedrooms</option>
-                    <option value="1-2">1–2 Bedrooms</option>
-                    <option value="3-4">3–4 Bedrooms</option>
-                    <option value="5-plus">5+ Bedrooms</option>
+                    <option value="any">Any configuration</option>
+                    <option value="2">2 BHK</option>
+                    <option value="3">3 BHK</option>
+                    <option value="4-plus">4+ BHK / Bungalow</option>
                   </select>
                   <ChevronDown
                     className="w-4 h-4 text-ink-muted absolute right-3 top-3.5 pointer-events-none"
@@ -269,7 +271,7 @@ export const PropertySearch: React.FC<PropertySearchProps> = ({
                     className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-line bg-tint text-ink hover:bg-surface transition-colors cursor-pointer min-h-[40px] focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
                   >
                     <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-                    <span>Clear filters</span>
+                    <span>Reset search filters</span>
                   </button>
                 )}
               </div>

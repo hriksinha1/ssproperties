@@ -76,10 +76,10 @@ export const FeaturedListings: React.FC<FeaturedListingsProps> = ({
         {/* Section Heading Row */}
         <SectionHeading
           id="properties-heading"
-          eyebrow="Properties"
+          eyebrow="Properties in Kolkata"
           titleLine1="Places Worth Taking A"
           titleLine2="Closer Look At."
-          description="A selection of properties from SSProperty. Message us about any listing to ask for details or arrange a viewing."
+          description="A curated selection of flats, independent homes, plots and offices in Kolkata. Message us about any listing to check floor plans or schedule a site visit."
           rightAction={
             <a
               href={WHATSAPP_URL}

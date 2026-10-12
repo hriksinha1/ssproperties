@@ -24,12 +24,12 @@ A single-page real-estate landing website built with React 19, TypeScript, Vite 
 All global site constants are centralized in `src/config/site.ts`:
 
 - `BRAND_NAME`: Set to `"SSProperty"`.
-- `SAMPLE_CONTENT`: Set to `true` by default while inventory and testimonials are samples. When set to `false`, sample banners are removed, and sections without real data automatically hide cleanly.
-- `WHATSAPP_URL`: Set to `"https://wa.me/8282878287"`. (Note for owner: verify country code prefix if required, e.g. `https://wa.me/918282878287` for India).
-- `WHATSAPP_DISPLAY`: Set to `"8282878287"`.
-- `SOCIAL_LINKS`: Links to verified Facebook, Instagram, LinkedIn, and WhatsApp channels.
-- `CONTACT_INFO`: Optional email and address fields (only rendered in the UI when populated).
-- `CURRENCY_CODE` & `CURRENCY_LOCALE`: Defaults to `"USD"` / `"en-US"`. Update to match your local market currency and formatting (e.g. `"INR"` / `"en-IN"`).
+- `SAMPLE_CONTENT`: Set to `true` by default while inventory and testimonials are illustrative samples. When set to `false`, sample banners are removed, and sections without real data automatically hide cleanly.
+- `WHATSAPP_URL`: Set to `"https://wa.me/918282878287"` (SSProperty WhatsApp with India international prefix `+91`).
+- `WHATSAPP_DISPLAY`: Set to `"+91 82828 78287"`.
+- `SOCIAL_LINKS`: Links to verified Facebook, Instagram, LinkedIn, and WhatsApp channels (`sspropertykol`).
+- `CONTACT_INFO`: Business address set to `"Kolkata, West Bengal, India"`.
+- `CURRENCY_CODE` & `CURRENCY_LOCALE`: Localized to `"INR"` / `"en-IN"` with Lakh (`₹98 Lakh`) and Crore (`₹2.15 Cr`) formatting.
 - `AREA_UNIT`: Default `"sq. ft."`.
 
 ## Environment Variables

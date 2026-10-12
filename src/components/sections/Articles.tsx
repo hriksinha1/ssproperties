@@ -21,10 +21,10 @@ export const Articles: React.FC = () => {
         {/* Section Heading Row */}
         <SectionHeading
           id="articles-heading"
-          eyebrow="Guides"
+          eyebrow="Guides & Insights"
           titleLine1="Your Guide To Smarter"
           titleLine2="Property Decisions"
-          description="Short guides to help you prepare for buying, renting or selling."
+          description="Practical guidance and checklists to help you prepare for buying, renting or registering property in Kolkata."
         />
 
         {/* 3 Articles Grid (tablet spans 3rd card across 2 columns) */}

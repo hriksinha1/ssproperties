@@ -25,7 +25,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onSelect }
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"
           aria-hidden="true"
         />
       </div>
@@ -36,9 +36,12 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onSelect }
           <Badge variant="white" dot>
             {property.status}
           </Badge>
+          <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-surface/95 text-ink border border-line shadow-xs">
+            {property.bhkConfig}
+          </span>
           {SAMPLE_CONTENT && property.isSample && (
-            <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-surface/90 text-ink border border-line">
-              Sample listing
+            <span className="px-2.5 py-1 rounded-full text-[11px] font-medium bg-tint/90 text-ink border border-line">
+              Sample
             </span>
           )}
         </div>
@@ -62,7 +65,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onSelect }
       </div>
 
       {/* Anchored Bottom White Card Panel */}
-      <div className="relative z-10 m-3 p-4 rounded-[20px] bg-surface/95 backdrop-blur-md border border-white/80 shadow-sm flex flex-col gap-2.5 text-left">
+      <div className="relative z-10 m-3 p-4 rounded-[18px] bg-surface/95 backdrop-blur-md border border-white/80 shadow-sm flex flex-col gap-2.5 text-left">
         {/* Title Row with single focus stop */}
         <div className="flex items-center justify-between gap-2">
           <button
@@ -77,7 +80,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onSelect }
             type="button"
             aria-label={`View details for ${property.title}`}
             onClick={(e) => onSelect?.(property, e.currentTarget)}
-            className="w-10 h-10 rounded-full border border-line bg-surface text-ink hover:bg-accent hover:border-accent transition-colors flex items-center justify-center shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+            className="w-9 h-9 rounded-full border border-line bg-surface text-ink hover:bg-accent hover:border-accent transition-colors flex items-center justify-center shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
           >
             <ArrowUpRight className="w-4 h-4" />
           </button>
@@ -89,21 +92,36 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onSelect }
           <span className="truncate">{property.location}</span>
         </div>
 
-        {/* Features Chips (wrapping, no overflow clipping, text >= 12px) */}
+        {/* Features Chips (Indian terminology: BHK, Area, Baths) */}
         <div className="flex items-center gap-2 flex-wrap text-xs font-medium text-ink-muted py-1.5 border-y border-line">
-          <span className="inline-flex items-center gap-1">
-            <Bed className="w-3.5 h-3.5 text-ink" aria-hidden="true" />
-            <span>{property.beds} Beds</span>
-          </span>
-          <span className="text-line" aria-hidden="true">•</span>
-          <span className="inline-flex items-center gap-1">
-            <Bath className="w-3.5 h-3.5 text-ink" aria-hidden="true" />
-            <span>{property.baths} Baths</span>
-          </span>
-          <span className="text-line" aria-hidden="true">•</span>
+          {property.beds > 0 ? (
+            <>
+              <span className="inline-flex items-center gap-1">
+                <Bed className="w-3.5 h-3.5 text-ink" aria-hidden="true" />
+                <span>{property.bhkConfig}</span>
+              </span>
+              <span className="text-line" aria-hidden="true">•</span>
+            </>
+          ) : (
+            <>
+              <span className="text-ink font-semibold">{property.propertyType}</span>
+              <span className="text-line" aria-hidden="true">•</span>
+            </>
+          )}
+
+          {property.baths > 0 && (
+            <>
+              <span className="inline-flex items-center gap-1">
+                <Bath className="w-3.5 h-3.5 text-ink" aria-hidden="true" />
+                <span>{property.baths} Baths</span>
+              </span>
+              <span className="text-line" aria-hidden="true">•</span>
+            </>
+          )}
+
           <span className="inline-flex items-center gap-1">
             <Maximize2 className="w-3.5 h-3.5 text-ink" aria-hidden="true" />
-            <span>{property.areaSqFt} {AREA_UNIT}</span>
+            <span>{property.superBuiltUpSqFt} {AREA_UNIT}</span>
           </span>
         </div>
 
@@ -112,16 +130,16 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onSelect }
           <div className="flex items-center gap-2 min-w-0">
             {/* SS Monogram Avatar Circle */}
             <div
-              className="w-7 h-7 rounded-full bg-tint border border-line flex items-center justify-center text-ink text-xs font-semibold select-none shrink-0"
+              className="w-6 h-6 rounded-full bg-tint border border-line flex items-center justify-center text-ink text-[10px] font-bold select-none shrink-0"
               aria-hidden="true"
             >
               SS
             </div>
-            <span className="text-xs text-ink font-medium truncate">SSProperty team</span>
+            <span className="text-xs text-ink-muted font-medium truncate">SSProperty</span>
           </div>
 
-          <span className="text-sm md:text-base font-semibold text-ink tabular-nums whitespace-nowrap">
-            {formatListingPrice(property.price)}
+          <span className="text-sm md:text-base font-bold text-ink tabular-nums whitespace-nowrap">
+            {formatListingPrice(property.price, property.status)}
           </span>
         </div>
       </div>

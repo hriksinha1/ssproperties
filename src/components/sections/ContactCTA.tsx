@@ -313,7 +313,7 @@ export const ContactCTA: React.FC = () => {
                         setPhone(e.target.value);
                         if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
                       }}
-                      placeholder="Your phone number"
+                      placeholder="+91 98300 12345"
                       aria-invalid={!!errors.phone}
                       aria-describedby={errors.phone ? "contact-phone-error" : undefined}
                       className={`w-full min-h-[48px] px-4 py-2.5 rounded-[14px] bg-white/10 border text-white placeholder-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-accent transition-all ${
@@ -344,7 +344,7 @@ export const ContactCTA: React.FC = () => {
                         setEmail(e.target.value);
                         if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
                       }}
-                      placeholder="Your email address"
+                      placeholder="name@example.com"
                       aria-invalid={!!errors.email}
                       aria-describedby={errors.email ? "contact-email-error" : undefined}
                       className={`w-full min-h-[48px] px-4 py-2.5 rounded-[14px] bg-white/10 border text-white placeholder-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-accent transition-all ${
@@ -374,7 +374,7 @@ export const ContactCTA: React.FC = () => {
                         setMessage(e.target.value);
                         if (errors.message) setErrors((prev) => ({ ...prev, message: "" }));
                       }}
-                      placeholder="Type of property, preferred neighborhood, budget or timeline..."
+                      placeholder="e.g. 3 BHK flat in New Town or Rajarhat, budget ₹80L - ₹1Cr, looking to move in within 6 months..."
                       aria-invalid={!!errors.message}
                       aria-describedby={errors.message ? "contact-message-error" : undefined}
                       className={`w-full p-4 rounded-[14px] bg-white/10 border text-white placeholder-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-accent transition-all resize-none ${

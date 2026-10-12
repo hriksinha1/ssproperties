@@ -76,8 +76,8 @@ export const Hero: React.FC<HeroProps> = ({
               Feels Like Yours.
             </h1>
 
-            <p className="text-white/90 text-sm sm:text-base font-normal max-w-[38ch] leading-relaxed">
-              Browse homes, apartments, land and offices, then message SSProperty to ask questions or arrange a viewing.
+            <p className="text-white/90 text-sm sm:text-base font-normal max-w-[42ch] leading-relaxed">
+              Browse residential flats, independent houses, land plots and offices across Kolkata, then message SSProperty to ask questions or arrange a viewing.
             </p>
 
             <div className="flex items-center gap-3 flex-wrap pt-1">
