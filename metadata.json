@@ -1,0 +1,6 @@
+{
+  "name": "Architron - Luxury Real Estate",
+  "description": "Discover extraordinary architectural homes in the most desirable locations with Architron.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
